@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            --card-bg: #ffffff;
+            --danger: #ff4757;
+            --safe: #2ed573;
+            --primary: #3742fa;
+            --text-sub: #747d8c;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background: var(--bg-gradient);
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            display: flex; justify-content: center; align-items: flex-start; 
+            width: 320px; min-height: 100vh;
+        }
+
+        @media (min-width: 400px) { body { width: 100vw; align-items: center; } }
+
+        .container {
+            background: var(--card-bg);
+            width: 100%; max-width: 290px;
+            box-sizing: border-box; margin: 15px; padding: 20px;
+            border-radius: 16px; text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .status-icon { font-size: 40px; margin-bottom: 10px; }
+        .status-main { font-size: 18px; font-weight: 800; margin: 0; }
+
+        #url-display {
+            background: #f1f2f6; padding: 8px; border-radius: 8px;
+            font-size: 11px; color: var(--text-sub); margin: 15px 0;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+            display: block; border: 1px solid #dfe4ea;
+        }
+
+        .bar-outer { width: 100%; height: 6px; background: #dfe4ea; border-radius: 10px; overflow: hidden; margin-bottom: 5px; }
+        #confidence-bar { height: 100%; width: 0%; background: var(--primary); transition: width 1s ease; }
+        #label-display { font-size: 11px; color: #747d8c; margin: 0; }
+
+        .action-button { 
+            width: 100%; padding: 10px; border-radius: 8px; border: none; 
+            font-size: 13px; font-weight: 700; cursor: pointer; margin-top: 15px; color: white; background: #a4b0be; 
+        }
+
+        body.safe .status-main { color: var(--safe); }
+        body.safe #confidence-bar { background: var(--safe); }
+        body.safe .action-button { background: var(--safe); }
+        body.dangerous .status-main { color: var(--danger); }
+        body.dangerous #confidence-bar { background: var(--danger); }
+        body.dangerous .action-button { background: var(--danger); }
+    </style>
+</head>
+<body class="loading">
+    <div class="container">
+        <div id="status-icon" class="status-icon">🔍</div>
+        <h1 id="status-main" class="status-main">Analyzing...</h1>
+        <div id="url-display">Detecting...</div>
+        <div class="bar-outer">
+            <div id="confidence-bar"></div>
+        </div>
+        <p id="label-display">Checking security features...</p>
+        <button id="action-button" class="action-button">Scanning...</button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>
